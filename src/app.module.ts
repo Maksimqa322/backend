@@ -12,7 +12,7 @@ import { MessagesModule } from './modules/messages/messages.module';
     TypeOrmModule.forRoot(databaseConfig),
     MessagesModule,
   ],
-  controllers: [MessagesController],
-  providers: [MessagesService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
