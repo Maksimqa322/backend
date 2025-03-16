@@ -1,9 +1,16 @@
-export const databaseConfig = (): TypeOrmModuleOptions => ({
-  type: 'postgres',
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT, 10),
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  // ... остальные настройки
-});
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
+
+export const databaseConfig = (): TypeOrmModuleOptions => {
+  const configService = new ConfigService();
+  return {
+    type: 'postgres',
+    host: configService.getOrThrow('DB_HOST'),
+    port: parseInt(configService.getOrThrow('DB_PORT'), 10),
+    username: configService.getOrThrow('DB_USER'),
+    password: configService.getOrThrow('DB_PASSWORD'),
+    database: configService.getOrThrow('DB_NAME'),
+    autoLoadEntities: true,
+    synchronize: true,
+  } as TypeOrmModuleOptions;
+};

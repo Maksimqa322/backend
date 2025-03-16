@@ -6,11 +6,8 @@ import { MessagesModule } from './modules/messages/messages.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ 
-      isGlobal: true,
-      envFilePath: '.env', // Добавляем явное указание на .env-файл
-    }),
-    TypeOrmModule.forRoot(databaseConfig()), // Вызываем функцию конфигурации
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRoot(databaseConfig()),
     MessagesModule,
   ],
   controllers: [],
